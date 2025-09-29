@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ChatLLM-Web 演示页面</title>
+  <title>ChatLLM-Web 前端</title>
   <style>
     body {
       font-family: "Segoe UI", sans-serif;
-      background-color: #f4f4f4;
+      background-color: #f9f9f9;
       margin: 0;
       padding: 2em;
       color: #333;
@@ -16,17 +16,27 @@
       text-align: center;
       margin-bottom: 2em;
     }
-    .status {
-      padding: 1em;
-      border-radius: 8px;
+    .card {
       background-color: #fff;
+      padding: 1.5em;
+      border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.05);
-      max-width: 600px;
+      max-width: 800px;
       margin: auto;
+      margin-bottom: 2em;
     }
-    .gpu-status {
+    .status {
       font-weight: bold;
       color: #0078d4;
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+      padding: 1em;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      resize: vertical;
     }
     button {
       padding: 0.6em 1.2em;
@@ -41,24 +51,38 @@
     button:hover {
       background-color: #005fa3;
     }
+    .response {
+      margin-top: 1em;
+      padding: 1em;
+      background-color: #eef;
+      border-radius: 6px;
+      white-space: pre-wrap;
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>🚀 ChatLLM-Web 演示页面</h1>
-    <p>欢迎使用 GitHub Pages 部署的 WebGPU 模型测试环境</p>
+    <h1>🤖 ChatLLM-Web 前端</h1>
+    <p>部署于 GitHub Pages，支持 WebGPU 检测与模型交互</p>
   </header>
 
-  <div class="status">
-    <p>🔍 当前 WebGPU 状态：</p>
-    <p class="gpu-status" id="gpuStatus">正在检测...</p>
+  <div class="card">
+    <p>🔍 WebGPU 状态：</p>
+    <p class="status" id="gpuStatus">正在检测...</p>
     <button onclick="checkWebGPU()">重新检测</button>
   </div>
 
-  <div class="status" style="margin-top:2em;">
-    <p>📦 模型加载入口（示例）</p>
+  <div class="card">
+    <p>📦 模型加载入口</p>
     <button onclick="loadModel()">加载模型</button>
     <p id="modelStatus">尚未加载</p>
+  </div>
+
+  <div class="card">
+    <p>💬 输入你的问题：</p>
+    <textarea id="userInput" placeholder="请输入问题..."></textarea>
+    <button onclick="sendPrompt()">发送</button>
+    <div class="response" id="responseBox">等待响应...</div>
   </div>
 
   <script>
@@ -75,14 +99,29 @@
 
     function loadModel() {
       const modelStatus = document.getElementById("modelStatus");
-      // 模拟加载过程（你可以替换为真实模型加载逻辑）
       modelStatus.textContent = "正在加载模型...";
+      // 模拟加载过程（可替换为真实逻辑）
       setTimeout(() => {
         modelStatus.textContent = "✅ 模型加载完成（模拟）";
       }, 1500);
     }
 
-    // 页面加载时自动检测 WebGPU
+    function sendPrompt() {
+      const input = document.getElementById("userInput").value.trim();
+      const responseBox = document.getElementById("responseBox");
+
+      if (!input) {
+        responseBox.textContent = "⚠️ 请输入内容后再发送。";
+        return;
+      }
+
+      responseBox.textContent = "⏳ 正在处理你的请求...";
+      // 模拟响应（可替换为真实推理逻辑）
+      setTimeout(() => {
+        responseBox.textContent = `🧠 模拟响应：你输入的是「${input}」`;
+      }, 2000);
+    }
+
     window.onload = checkWebGPU;
   </script>
 </body>
