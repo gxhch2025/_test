@@ -3,126 +3,39 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ChatLLM-Web 前端</title>
-  <style>
-    body {
-      font-family: "Segoe UI", sans-serif;
-      background-color: #f9f9f9;
-      margin: 0;
-      padding: 2em;
-      color: #333;
-    }
-    header {
-      text-align: center;
-      margin-bottom: 2em;
-    }
-    .card {
-      background-color: #fff;
-      padding: 1.5em;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-      max-width: 800px;
-      margin: auto;
-      margin-bottom: 2em;
-    }
-    .status {
-      font-weight: bold;
-      color: #0078d4;
-    }
-    textarea {
-      width: 100%;
-      height: 100px;
-      padding: 1em;
-      font-size: 1em;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      resize: vertical;
-    }
-    button {
-      padding: 0.6em 1.2em;
-      font-size: 1em;
-      margin-top: 1em;
-      cursor: pointer;
-      background-color: #0078d4;
-      color: white;
-      border: none;
-      border-radius: 4px;
-    }
-    button:hover {
-      background-color: #005fa3;
-    }
-    .response {
-      margin-top: 1em;
-      padding: 1em;
-      background-color: #eef;
-      border-radius: 6px;
-      white-space: pre-wrap;
-    }
-  </style>
+  <title>AI 对话平台</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="module" src="script.js"></script>
 </head>
 <body>
   <header>
-    <h1>🤖 ChatLLM-Web 前端</h1>
-    <p>部署于 GitHub Pages，支持 WebGPU 检测与模型交互</p>
+    <h1>🤖 欢迎体验 AI 对话平台</h1>
+    <p>本平台支持 WebGPU 推理，无需安装，即刻体验</p>
   </header>
 
-  <div class="card">
-    <p>🔍 WebGPU 状态：</p>
-    <p class="status" id="gpuStatus">正在检测...</p>
-    <button onclick="checkWebGPU()">重新检测</button>
-  </div>
+  <main>
+    <section class="card">
+      <h2>🔍 WebGPU 状态</h2>
+      <p id="gpuStatus">正在检测...</p>
+      <button id="checkGpuBtn">重新检测</button>
+    </section>
 
-  <div class="card">
-    <p>📦 模型加载入口</p>
-    <button onclick="loadModel()">加载模型</button>
-    <p id="modelStatus">尚未加载</p>
-  </div>
+    <section class="card">
+      <h2>📦 模型加载</h2>
+      <button id="loadModelBtn">加载模型</button>
+      <p id="modelStatus">尚未加载</p>
+    </section>
 
-  <div class="card">
-    <p>💬 输入你的问题：</p>
-    <textarea id="userInput" placeholder="请输入问题..."></textarea>
-    <button onclick="sendPrompt()">发送</button>
-    <div class="response" id="responseBox">等待响应...</div>
-  </div>
+    <section class="card">
+      <h2>💬 与 AI 对话</h2>
+      <textarea id="userInput" placeholder="请输入你的问题..."></textarea>
+      <button id="sendBtn">发送</button>
+      <div id="responseBox">等待响应...</div>
+    </section>
+  </main>
 
-  <script>
-    function checkWebGPU() {
-      const status = document.getElementById("gpuStatus");
-      if (!navigator.gpu) {
-        status.textContent = "❌ WebGPU 不支持，请使用最新版 Chrome 或 Edge 并启用 WebGPU";
-        status.style.color = "red";
-      } else {
-        status.textContent = "✅ WebGPU 已启用！";
-        status.style.color = "green";
-      }
-    }
-
-    function loadModel() {
-      const modelStatus = document.getElementById("modelStatus");
-      modelStatus.textContent = "正在加载模型...";
-      // 模拟加载过程（可替换为真实逻辑）
-      setTimeout(() => {
-        modelStatus.textContent = "✅ 模型加载完成（模拟）";
-      }, 1500);
-    }
-
-    function sendPrompt() {
-      const input = document.getElementById("userInput").value.trim();
-      const responseBox = document.getElementById("responseBox");
-
-      if (!input) {
-        responseBox.textContent = "⚠️ 请输入内容后再发送。";
-        return;
-      }
-
-      responseBox.textContent = "⏳ 正在处理你的请求...";
-      // 模拟响应（可替换为真实推理逻辑）
-      setTimeout(() => {
-        responseBox.textContent = `🧠 模拟响应：你输入的是「${input}」`;
-      }, 2000);
-    }
-
-    window.onload = checkWebGPU;
-  </script>
+  <footer>
+    <p>© 2025 ChatLLM-Web | <a href="#">邀请好友体验</a></p>
+  </footer>
 </body>
 </html>
