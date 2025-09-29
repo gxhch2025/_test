@@ -3,34 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI 对话平台</title>
+  <title>AI 对话平台（WebGPU 推理）</title>
   <link rel="stylesheet" href="style.css" />
   <script type="module" src="script.js"></script>
 </head>
 <body>
   <header>
-    <h1>🤖 欢迎体验 AI 对话平台</h1>
-    <p>支持 WebGPU 推理，无需安装，即刻体验</p>
+    <h1>🤖 AI 对话平台（真实推理）</h1>
+    <p>基于 WebLLM 与 WebGPU，无后台即刻体验</p>
   </header>
-
   <main>
+    <!-- WebGPU 检测 -->
     <section class="card">
       <h2>🔍 WebGPU 状态</h2>
       <p id="gpuStatus">正在检测...</p>
       <button id="checkGpuBtn">重新检测</button>
     </section>
 
+    <!-- 模型加载 -->
     <section class="card">
       <h2>📦 模型加载</h2>
       <select id="modelSelector">
-        <option value="chatglm">ChatGLM</option>
-        <option value="qwen">Qwen</option>
-        <option value="minicpm">MiniCPM</option>
+        <option value="model.gguf">默认模型</option>
       </select>
       <button id="loadModelBtn">加载模型</button>
       <p id="modelStatus">尚未加载</p>
     </section>
 
+    <!-- 对话框 -->
     <section class="card">
       <h2>💬 与 AI 对话</h2>
       <textarea id="userInput" placeholder="请输入你的问题..."></textarea>
@@ -38,15 +38,15 @@
       <div id="chatHistory"></div>
     </section>
 
+    <!-- 邀请分享 -->
     <section class="card">
       <h2>📣 邀请好友体验</h2>
       <button onclick="copyInvite()">复制邀请链接</button>
       <p id="inviteStatus">点击按钮复制链接</p>
     </section>
   </main>
-
   <footer>
-    <p>© 2025 ChatLLM-Web | <a href="#">邀请体验</a></p>
+    <p>© 2025 AI 对话平台</p>
   </footer>
 </body>
 </html>

@@ -24,23 +24,23 @@ function checkWebGPU() {
   }
 }
 
-function loadModel() {
-  const model = document.getElementById("modelSelector").value;
-  const modelStatus = document.getElementById("modelStatus");
-  modelStatus.textContent = `正在加载模型：${model}...`;
-  setTimeout(() => {
-    modelStatus.textContent = `✅ 模型 ${model} 加载完成（模拟）`;
-  }, 1500);
+async function loadModel() {
+  const selector = document.getElementById("modelSelector");
+  const file = selector.value;
+  const status = document.getElementById("modelStatus");
+  status.textContent = `正在加载模型：${file} ...`;
+  // 初始化 Worker 并传入模型路径
+  await runChat.initModel(`assets/${file}`);
+  status.textContent = `✅ 模型 ${file} 加载完成`;
 }
 
 function sendPrompt() {
   const input = document.getElementById("userInput").value.trim();
   if (!input) return;
-
   chatHistory.push({ role: "user", text: input });
   renderChat();
 
-  runChat(input, (output) => {
+  runChat.chat(input, (output) => {
     chatHistory.push({ role: "ai", text: output });
     renderChat();
   });
