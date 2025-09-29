@@ -22,20 +22,33 @@
 
     <section class="card">
       <h2>📦 模型加载</h2>
+<select id="modelSelector">
+  <option value="chatglm">ChatGLM</option>
+  <option value="qwen">Qwen</option>
+  <option value="minicpm">MiniCPM</option>
+</select>
+
       <button id="loadModelBtn">加载模型</button>
       <p id="modelStatus">尚未加载</p>
     </section>
 
-    <section class="card">
-      <h2>💬 与 AI 对话</h2>
-      <textarea id="userInput" placeholder="请输入你的问题..."></textarea>
-      <button id="sendBtn">发送</button>
-      <div id="responseBox">等待响应...</div>
-    </section>
+	<section class="card">
+	  <h2>💬 与 AI 对话</h2>
+	  <textarea id="userInput" placeholder="请输入你的问题..."></textarea>
+	  <button id="sendBtn">发送</button>
+	  <div id="chatHistory"></div>
+	</section>
+
   </main>
 
   <footer>
     <p>© 2025 ChatLLM-Web | <a href="#">邀请好友体验</a></p>
+<section class="card">
+  <h2>📣 邀请好友体验</h2>
+  <button onclick="copyInvite()">复制邀请链接</button>
+  <p id="inviteStatus">点击按钮复制链接</p>
+</section>
+
   </footer>
 </body>
 </html>

@@ -16,20 +16,50 @@ function checkWebGPU() {
 }
 
 function loadModel() {
+  const model = document.getElementById("modelSelector").value;
   const modelStatus = document.getElementById("modelStatus");
-  modelStatus.textContent = "正在加载模型...";
+  modelStatus.textContent = `正在加载模型：${model}...`;
   setTimeout(() => {
-    modelStatus.textContent = "✅ 模型加载完成（模拟）";
+    modelStatus.textContent = `✅ 模型 ${model} 加载完成（模拟）`;
   }, 1500);
 }
 
-function sendPrompt() {
-  const input = document.getElementById("userInput").value;
-  const responseBox = document.getElementById("responseBox");
 
-  runChat(input, (output) => {
-    responseBox.textContent = output;
+import { runChat } from "./chat.js";
+
+const chatHistory = [];
+
+function renderChat() {
+  const container = document.getElementById("chatHistory");
+  container.innerHTML = "";
+  chatHistory.forEach(entry => {
+    const div = document.createElement("div");
+    div.className = `chat-entry ${entry.role}`;
+    div.textContent = entry.text;
+    container.appendChild(div);
   });
 }
+
+function sendPrompt() {
+  const input = document.getElementById("userInput").value.trim();
+  if (!input) return;
+
+  chatHistory.push({ role: "user", text: input });
+  renderChat();
+
+  runChat(input, (output) => {
+    chatHistory.push({ role: "ai", text: output });
+    renderChat();
+  });
+}
+
+function copyInvite() {
+  const url = window.location.href;
+  navigator.clipboard.writeText(url).then(() => {
+    document.getElementById("inviteStatus").textContent = "✅ 链接已复制，快去分享吧！";
+  });
+}
+window.copyInvite = copyInvite;
+
 
 window.onload = checkWebGPU;
