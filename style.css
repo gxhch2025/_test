@@ -45,12 +45,17 @@ button {
 button:hover {
   background-color: #005fa3;
 }
-#responseBox {
+#chatHistory .chat-entry {
   margin-top: 1em;
-  background-color: #eef;
   padding: 1em;
   border-radius: 6px;
   white-space: pre-wrap;
+}
+.chat-entry.user {
+  background-color: #d0eaff;
+}
+.chat-entry.ai {
+  background-color: #e0ffe0;
 }
 footer a {
   color: #0078d4;
@@ -58,17 +63,4 @@ footer a {
 }
 footer a:hover {
   text-decoration: underline;
-}
-
-.chat-entry {
-  margin-top: 1em;
-  padding: 1em;
-  border-radius: 6px;
-  background-color: #eef;
-}
-.chat-entry.user {
-  background-color: #d0eaff;
-}
-.chat-entry.ai {
-  background-color: #e0ffe0;
 }
